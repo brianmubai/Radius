@@ -1,4 +1,4 @@
-import { RadiusApp } from './app';
+import { RadiusApp } from './app.ts';
 
 const PORT = parseInt(process.env.PORT || '4000', 10);
 const app = new RadiusApp();
