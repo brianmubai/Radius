@@ -1,0 +1,18 @@
+{
+  "name": "@radius/backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "node --experimental-strip-types src/index.ts",
+    "test": "node --test --experimental-strip-types tests/*.spec.ts"
+  },
+  "dependencies": {
+    "@radius/types": "file:../types"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

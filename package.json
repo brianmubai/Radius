@@ -1,0 +1,20 @@
+{
+  "name": "radius-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "types",
+    "backend",
+    "admin",
+    "mobile"
+  ],
+  "scripts": {
+    "test": "node --test --experimental-strip-types backend/tests/*.spec.ts",
+    "dev:backend": "node --experimental-strip-types backend/src/index.ts",
+    "dev:admin": "npm --workspace=admin run dev",
+    "dev:mobile": "npm --workspace=mobile run start"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

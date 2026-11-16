@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Radius",
+    "slug": "radius",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0284c7"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.radius.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Radius uses your location to discover verified service professionals near you within your custom search radius."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0284c7"
+      },
+      "package": "app.radius.mobile",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Radius uses your location to discover verified service professionals near you within your custom search radius."
+        }
+      ]
+    ],
+    "scheme": "radius"
+  }
+}

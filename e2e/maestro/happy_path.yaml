@@ -1,0 +1,78 @@
+appId: app.radius.mobile
+---
+# ==============================================================================
+# RADIUS MVP PHASE 1 — HAPPY PATH END-TO-END ACCEPTANCE TEST
+# Flow:
+# 1. Requester launches app with GPS location granted (default 10 km radius)
+# 2. Explores category grid & finds nearby verified provider
+# 3. Verifies approximate ~750m zone masking & contact privacy prior to booking
+# 4. Instant booking confirmation with escrow fee calculation
+# 5. Authorizes payment via Stripe PaymentSheet (funds held in escrow)
+# 6. Provider marks job complete
+# 7. Requester confirms completion -> funds released & split (payout minus 12%)
+# 8. Requester submits 5-star review
+# ==============================================================================
+
+- launchApp:
+    clearState: true
+
+# 1. Onboarding & Location Permission
+- assertVisible: "Radius"
+- assertVisible: "Location: San Francisco, CA"
+- assertVisible: "Search Radius: 10 km"
+
+# 2. Category selection & radius filtering
+- tapOn: "Electrical"
+- assertVisible: "Dave Vance"
+- assertVisible: "ELECTRICAL • 1.8 km away"
+- assertVisible: "Downtown (~750m zone)"
+
+# 3. View provider profile & check privacy masking
+- tapOn: "Dave Vance"
+- assertVisible: "About the Professional"
+- assertVisible: "Approximate Service Area (~750m zone)"
+- assertVisible: "Exact address is shared only once booking is confirmed."
+
+# 4. Initiate instant booking & fee breakdown
+- tapOn: "Book Now"
+- assertVisible: "Booking Summary"
+- assertVisible: "Agreed Service Price"
+- assertVisible: "$150.00"
+- assertVisible: "Booking Fee (Platform) (5%, min $2.50)"
+- assertVisible: "$7.50"
+- assertVisible: "Total Amount (Held in Escrow)"
+- assertVisible: "$157.50"
+
+# 5. Confirm and authorize payment
+- tapOn: "Confirm & Authorize Payment"
+- assertVisible: "Stripe PaymentSheet"
+- tapOn: "Track Job"
+
+# 6. Verify booking state tracking (Funds Held)
+- assertVisible: "Booked & Funds Held"
+- assertVisible: "+1 (415) 555-4321" # Confirmed phone revealed
+- assertVisible: "742 Evergreen Terrace, San Francisco, CA"
+
+# 7. Switch to Pro mode to progress state machine
+- tapOn: "Customer Mode"
+- assertVisible: "Pro Mode"
+- tapOn: "Jobs"
+- assertVisible: "Start Job"
+- tapOn: "Start Job"
+- tapOn: "Mark Complete"
+- tapOn: "OK"
+
+# 8. Switch back to Customer mode to confirm and release escrow
+- tapOn: "Pro Mode"
+- assertVisible: "Customer Mode"
+- tapOn: "Confirm Completion & Release Payout"
+- tapOn: "Confirm & Release"
+- assertVisible: "Completed & Paid Out"
+
+# 9. Submit Review
+- tapOn: "★ Rate & Review Service"
+- assertVisible: "Rate & Review Service"
+- tapOn: "Describe your experience with this professional..."
+- inputText: "Outstanding electrical work. Fixed the breaker in under an hour."
+- tapOn: "Submit Review"
+- tapOn: "Done"
